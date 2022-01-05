@@ -12,8 +12,10 @@ class EpisodesRemoteDataSourceImpl implements EpisodesRemoteDataSource {
   @override
   Future<EpisodesModel> getEpisodes({String offset = '0'}) async {
     try {
-      final response = await http
-          .get(Uri.parse('https://rickandmortyapi.com/api/character/?page=19'));
+      print(offset);
+      final response = await http.get(
+        Uri.parse('https://rickandmortyapi.com/api/character/?page=$offset'),
+      );
       final model = EpisodesModel.fromJson(
         jsonDecode(response.body) as Map<String, dynamic>,
       );
